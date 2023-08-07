@@ -20,7 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
             // Successful login
-            $_SESSION['username'] = $user['username']; // Store username in the session
+            $_SESSION['username'] = $user['username']; 
+            $_SESSION['user_id'] = $user['id']; 
             header("Location: user_page.php");
             exit();
         } else {

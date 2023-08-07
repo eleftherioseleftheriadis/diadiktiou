@@ -34,3 +34,21 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(100) NOT NULL UNIQUE,
     simplepush_key VARCHAR(255) NOT NULL UNIQUE
 );
+CREATE TABLE questions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    title VARCHAR(100) NOT NULL,
+    main_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE answers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    question_id INT,
+    main_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (question_id) REFERENCES questions(id)
+);
