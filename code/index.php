@@ -12,6 +12,8 @@
     <button class="theme-toggle">Toggle Theme</button>
     <a href="help.php" class="help-link">Help</a>
     <a href="askaquestion.php" class="ask-link">Ask a Question</a>
+	<a href="register.php" class="ask-link">Register</a>
+	<a href="login.php" class="ask-link">Log in</a>
   </header>
   <main>
     <section class="accordion">
@@ -25,17 +27,7 @@
       <h2>How to Register</h2>
       <div class="content">
         <p>To register and join our zany community, follow the steps below:</p>
-        <!-- Here you can include the HTML registration form -->
-        <form action="register.php" method="post">
-          <label>First Name: <input type="text" name="firstname" required></label><br>
-          <label>Last Name: <input type="text" name="lastname" required></label><br>
-          <label>Username: <input type="text" name="username" required></label><br>
-          <label>Password: <input type="password" name="password" required></label><br>
-          <label>Email: <input type="email" name="email" required></label><br>
-          <label>Special Wacky Question: <input type="text" name="simplepush_key" required></label><br>
-          <input type="submit" value="Register">
-        </form>
-        <!-- End of the HTML registration form -->
+		  <a href="register.php" class="ask-link">Register</a>
       </div>
     </section>
   </main>

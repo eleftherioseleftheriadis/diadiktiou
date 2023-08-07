@@ -1,0 +1,72 @@
+body {
+    font-family: "Comic Sans MS", cursive, sans-serif; /* Wacky font family */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f7dbd1; /* Wacky background color */
+    color: #ff00ff; /* Wacky text color */
+  }
+  
+  header {
+    background-color: #ff6600; /* Fun header background color */
+    color: #ffffff; /* Header text color for dark theme */
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  main {
+    padding: 2rem;
+  }
+  
+  footer {
+    background-color: #ff9933; /* Vibrant footer background color */
+    color: #333; /* Footer text color for dark theme */
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  /* Accordion Styling */
+  .accordion {
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+  
+  .accordion h2 {
+    background-color: #ffcc00; /* Happy header background color */
+    color: #663399; /* Header text color for light theme */
+    padding: 1rem;
+  }
+  
+  .accordion .content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+  
+  .accordion.active .content {
+    max-height: 500px; /* Set a maximum height for the content */
+  }
+  
+  /* Dark Theme Styling */
+  body.dark-mode {
+    background-color: #660066; /* Dark background color */
+    color: #ff9933; /* Text color for dark theme */
+  }
+  
+  body.dark-mode header,
+  body.dark-mode footer {
+    background-color: #663399; /* Dark header and footer background color */
+  }
+  
+  /* Theme Toggle Button */
+  .theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #ff99cc; /* Fun button background color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
