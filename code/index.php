@@ -12,8 +12,24 @@
     <button class="theme-toggle">Toggle Theme</button>
     <a href="help.php" class="help-link">Help</a>
     <a href="askaquestion.php" class="ask-link">Ask a Question</a>
-	<a href="register.php" class="ask-link">Register</a>
-	<a href="login.php" class="ask-link">Log in</a>
+    <?php
+    session_start();
+    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        echo '<a href="user_page.php" class="profile-link">Profile</a>';
+        echo '<form method="POST" style="display: inline;">
+                <button type="submit" name="logout">Log out</button>
+              </form>';
+    } else {
+        echo '<a href="register.php" class="ask-link">Register</a> ';
+        echo '<a href="login.php" class="ask-link">Log in</a>';
+    }
+    
+    if (isset($_POST['logout'])) {
+        session_destroy();
+        header("Location: login.php");
+        exit();
+    }
+    ?>
   </header>
   <main>
     <section class="accordion">

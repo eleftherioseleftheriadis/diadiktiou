@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +16,20 @@
     <button class="theme-toggle">Toggle Theme</button>
     <a href="index.php" class="index-link">Back to Home</a>
     <a href="askaquestion.php" class="ask-link">Ask a Question</a>
+    <?php
+    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        echo '<a href="user_page.php" class="profile-link">Profile</a>';
+        echo '<form method="POST" style="display: inline;">
+                <button type="submit" name="logout">Log out</button>
+              </form>';
+    }
+    
+    if (isset($_POST['logout'])) {
+        session_destroy();
+        header("Location: login.php");
+        exit();
+    }
+    ?>
   </header>
   <main>
     <section class="accordion">
