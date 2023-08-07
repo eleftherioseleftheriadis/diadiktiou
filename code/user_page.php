@@ -73,8 +73,11 @@ $conn->close();
   <header>
     <h1>Welcome to the Wacky Website!</h1>
     <button class="theme-toggle">Toggle Theme</button>
+    <a href="index.php" class="index-link">Home</a>
     <a href="help.php" class="help-link">Help</a>
     <a href="askaquestion.php" class="ask-link">Ask a Question</a>
+    <a href="answer_question.php" class="Wisdom">Wisdom</a>
+    <a href="all_questions.php" class="ask-link">View Wisdom</a>
     <form method="POST" style="display: inline;">
       <button type="submit" name="logout">Log out</button>
     </form>

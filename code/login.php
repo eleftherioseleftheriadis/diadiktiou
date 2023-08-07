@@ -46,10 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
   <header>
     <h1>Login to the Wacky Website</h1>
+    <a href="index.php" class="index-link">Home</a>
     <a href="help.php" class="help-link">Help</a>
     <a href="askaquestion.php" class="ask-link">Ask a Question</a>
     <a href="register.php" class="ask-link">Register</a>
-    <a href="login.php" class="ask-link">Log in</a>
   </header>
   <main>
     <section class="login-form">

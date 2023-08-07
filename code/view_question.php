@@ -7,10 +7,8 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $user_id = $_SESSION['user_id'];
-    $title = $_POST["title"];
-    $main_text = $_POST["main_text"];
+if (isset($_GET['id'])) {
+    $question_id = $_GET['id'];
 
     $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
@@ -18,18 +16,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Database connection failed: " . $conn->connect_error);
     }
 
-    $insert_query = "INSERT INTO questions (user_id, title, main_text) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($insert_query);
-    $stmt->bind_param("iss", $user_id, $title, $main_text);
+    $question_query = "SELECT id, title, main_text, created_at FROM questions WHERE id = ?";
+    $stmt = $conn->prepare($question_query);
+    $stmt->bind_param("i", $question_id);
+    $stmt->execute();
+    $question_result = $stmt->get_result();
 
-    if ($stmt->execute()) {
-        $success_message = "Question submitted successfully.";
+    if ($question_result->num_rows === 1) {
+        $question = $question_result->fetch_assoc();
+
+        $answers_query = "SELECT main_text, created_at FROM answers WHERE question_id = ? ORDER BY created_at ASC";
+        $stmt = $conn->prepare($answers_query);
+        $stmt->bind_param("i", $question_id);
+        $stmt->execute();
+        $answers_result = $stmt->get_result();
     } else {
-        $error_message = "Error submitting question: " . $conn->error;
+        header("Location: all_questions.php");
+        exit();
     }
 
     $stmt->close();
     $conn->close();
+} else {
+    header("Location: all_questions.php");
+    exit();
 }
 ?>
 
@@ -48,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <a href="index.php" class="index-link">Home</a>
     <a href="help.php" class="help-link">Help</a>
     <a href="askaquestion.php" class="ask-link">Ask a Question</a>
-    <a href="all_questions.php" class="ask-link">View Wisdom</a>
+    <a href="answer_question.php" class="Wisdom">Wisdom</a>
     <?php
     if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         echo '<a href="user_page.php" class="profile-link">Profile</a>';
@@ -67,22 +77,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ?>
   </header>
   <main>
-    <section class="question-form">
-      <h2>Submit a New Question</h2>
-      <form action="askaquestion.php" method="post">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-        <label for="main_text">Main Text:</label>
-        <textarea id="main_text" name="main_text" rows="4" required></textarea>
-        <button type="submit">Submit Question</button>
-      </form>
-      <?php
-      if (isset($success_message)) {
-          echo '<p class="success">' . $success_message . '</p>';
-      } elseif (isset($error_message)) {
-          echo '<p class="error">' . $error_message . '</p>';
-      }
-      ?>
+    <section class="question-view">
+      <h2><?php echo $question['title']; ?></h2>
+      <p><?php echo $question['main_text']; ?></p>
+      <p><strong>Posted on:</strong> <?php echo $question['created_at']; ?></p>
+    </section>
+
+    <section class="answers-list">
+      <h2>Answers</h2>
+      <ul>
+        <?php
+        if ($answers_result->num_rows > 0) {
+            while ($answer = $answers_result->fetch_assoc()) {
+                echo '<li><p>' . $answer['main_text'] . '</p><p><em>Posted on: ' . $answer['created_at'] . '</em></p></li>';
+            }
+        } else {
+            echo '<li>No answers available.</li>';
+        }
+        ?>
+      </ul>
     </section>
   </main>
   <footer>

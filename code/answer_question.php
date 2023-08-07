@@ -45,9 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <header>
     <h1>Welcome to the Wacky Website!</h1>
     <button class="theme-toggle">Toggle Theme</button>
+    <a href="index.php" class="index-link">Home</a>
     <a href="help.php" class="help-link">Help</a>
     <a href="askaquestion.php" class="ask-link">Ask a Question</a>
-    <a href="register.php" class="ask-link">Register</a>
+    <a href="all_questions.php" class="ask-link">View Wisdom</a>
     <?php
     if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         echo '<a href="user_page.php" class="profile-link">Profile</a>';
