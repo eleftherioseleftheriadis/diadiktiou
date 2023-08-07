@@ -12,8 +12,6 @@
     <button class="theme-toggle">Toggle Theme</button>
     <a href="index.php" class="index-link">Home</a>
     <a href="help.php" class="help-link">Help</a>
-    <a href="askaquestion.php" class="ask-link">Ask a Question</a>
-	<a href="register.php" class="ask-link">Register</a>
   <a href="login.php" class="ask-link">Login</a>
   </header>
   <main>

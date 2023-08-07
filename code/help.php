@@ -25,8 +25,9 @@ session_start();
               <button type="submit" name="logout">Log out</button>
             </form>';
   } else {
-      echo '<a href="register.php" class="ask-link">Register</a>';
-  }
+        echo '<a href="register.php" class="ask-link">Register</a> ';
+        echo '<a href="login.php" class="ask-link">Log in</a>';
+    }
     
     if (isset($_POST['logout'])) {
         session_destroy();

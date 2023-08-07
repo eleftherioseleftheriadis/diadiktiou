@@ -48,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <h1>Login to the Wacky Website</h1>
     <a href="index.php" class="index-link">Home</a>
     <a href="help.php" class="help-link">Help</a>
-    <a href="askaquestion.php" class="ask-link">Ask a Question</a>
     <a href="register.php" class="ask-link">Register</a>
   </header>
   <main>
