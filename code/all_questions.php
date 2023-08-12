@@ -110,6 +110,7 @@ $conn->close();
             </select>
             <button type="submit">Search</button>
         </form>
+        <button id="export-xml" onclick="exportToXML()">Export to XML</button>
     </header>
     <main>
         <section class="content">
@@ -140,3 +141,34 @@ $conn->close();
     <script src="script.js"></script>
 </body>
 </html>
+<script>
+    function exportToXML() {
+        // Create a new XML document
+        var xmlDocument = document.implementation.createDocument(null, 'questions');
+
+        // Loop through the questions and answers to create XML elements
+        <?php foreach ($questions as $question) : ?>
+            var questionElement = xmlDocument.createElement('question');
+            questionElement.setAttribute('id', '<?php echo $question['id']; ?>');
+            questionElement.setAttribute('title', '<?php echo htmlentities($question['title']); ?>');
+            questionElement.setAttribute('main_text', '<?php echo htmlentities($question['main_text']); ?>');
+            questionElement.setAttribute('created_at', '<?php echo $question['created_at']; ?>');
+            xmlDocument.documentElement.appendChild(questionElement);
+        <?php endforeach; ?>
+
+        // Convert the XML document to a string
+        var serializer = new XMLSerializer();
+        var xmlString = serializer.serializeToString(xmlDocument);
+
+        // Create a downloadable link for the XML content
+        var downloadLink = document.createElement('a');
+        downloadLink.href = 'data:text/xml;charset=utf-8,' + encodeURIComponent(xmlString);
+        downloadLink.download = 'questions.xml';
+        downloadLink.innerHTML = 'Download XML';
+
+        // Append the link to the body and click it to trigger the download
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
+</script>
